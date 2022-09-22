@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cálculo de Velocidade média</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <header>
+        <h1>Velocidade Média</h1>
+    </header>
+    <nav>
+        <a class="active" href="#">Home</a>
+        <a href="./about.html">Sobre</a>
+    </nav>
+
+    <div class="container">
+        <h2>Cálculo</h2>
+        <input type="number" placeholder="Informe o valor do deslocamento" id="distancia">
+        <input type="number" placeholder="Informe o intervalo de tempo" id="tempo">
+        <div class="bt-out">
+            <button onclick="limpar()">Limpar</button>
+            <button onclick="calcular()">Calcular</button>
+        </div>
+        <div id="fast-res"></div>
+    </div>
+
+    <div class="container">
+        <h2>Resultados</h2>
+        <div id="res"></div>
+    </div>
+
+    <footer>
+            <li>SENAI SC</li>
+            <li>Curso de Desenvolvimentos de Sistemas</li>
+            <li>Lógica de Programa</li>
+            <li>Bruno Ricardo Wotzke</li>
+    </footer>
+
+    <script>
+        const distancia = document.getElementById('distancia');
+        const tempo = document.getElementById('tempo');
+        const fastRes = document.getElementById('fast-res');
+        const result = document.getElementById('res');
+
+        let arrRes = [];
+
+        const getArr = () => {
+            result.innerHTML = "";
+            for(let i of arrRes){
+                result.innerHTML += `<div class="r-out"> ${i[2]}<span class="r-in">${i[0]}km - ${i[1]}km/h</span></div><br>`;
+            }
+        }
+
+        const calcular = () => {
+            let res = parseInt(distancia.value) / parseInt(tempo.value);
+            fastRes.innerText = res;
+            arrRes.push([distancia.value, tempo.value, res.toFixed(2)]);
+            getArr();
+        }
+        
+        const limpar = () => {
+            distancia.value = "";
+            tempo.value = "";
+            fastRes.innerHTML = "";
+            arrRes = [];
+            getArr();
+        }
+    </script>
+</body>
+</html>
